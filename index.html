@@ -130,10 +130,7 @@
       <sc-if value="{{ showNumbers }}" hint-placeholder-val="{{ true }}"><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#6b6862;margin-bottom:18px">05</div></sc-if>
       <h2 style="margin:0 0 clamp(20px,2.4vw,28px);font-size:clamp(1.7rem,3.1vw,2.5rem);line-height:1.1;letter-spacing:-0.025em;font-weight:500">Book a call</h2>
       <p style="margin:0 0 clamp(36px,4.5vw,56px);max-width:52ch;font-size:clamp(1rem,1.15vw,1.0625rem);line-height:1.65;color:#33302a">Thirty minutes. Bring the problem, the idea you have never had time to test, or just the sense that something could work better. If it is a fit, we start.</p>
-      <div style="border:1px solid #d9d5cb;border-radius:4px;min-height:560px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:40px 24px;text-align:center;background-image:repeating-linear-gradient(135deg,#f1efe9 0 10px,#f7f6f3 10px 20px)">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:#55524b">CAL.COM EMBED</div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:1.7;color:#6b6862;max-width:44ch">30-minute event, with a required booking question asking them to describe the problem in a few sentences</div>
-      </div>
+      <div style="width:100%;min-height:640px" id="my-cal-inline-30min"></div>
       <p style="margin:26px 0 0;font-size:0.9375rem;color:#6b6862">If you would rather write first: <a href="mailto:tex.x.mcginley@gmail.com?subject=Prototype%20enquiry">tex.x.mcginley@gmail.com</a></p>
     </div>
   </section>
@@ -161,5 +158,21 @@ class Component extends DCLogic {
   }
 }
 </script>
-</body>
-</html>
+
+<!-- Cal inline embed code begins -->
+
+<div style="width:100%;height:100%;overflow:scroll" id="my-cal-inline-30min"></div>
+<script type="text/javascript">
+  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+Cal("init", "30min", {origin:"https://app.cal.com"});
+Cal.config = Cal.config || {};
+Cal.config.forwardQueryParams = true;
+
+  Cal.ns["30min"]("inline", {
+    elementOrSelector:"#my-cal-inline-30min",
+    config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"light"},
+    calLink: "tex-mcginley/30min",
+  });
+
+  Cal.ns["30min"]("ui", {"theme":"light","hideEventTypeDetails":false,"layout":"month_view"});
+  </script>
